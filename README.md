@@ -1,1 +1,1 @@
-# EHC_DB
+This is MySQL database. It stands for storing data for EHC system, which is a part of project made on purpose of graduate studies (laboratories). EHC stands for Easy Hotel Control and is made for automate hotel reception processes. Whole project was made by me (MySQL 8.0 db - INNO DB Engine) and two colleagues who coded backend (Python) and frontend (Java/Kotlin - Android Studio). I'm sharing my part of project only :) The documentation is also on my repo.
