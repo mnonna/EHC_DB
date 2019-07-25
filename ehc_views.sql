@@ -49,7 +49,8 @@ CREATE VIEW roomsreservations AS
 CREATE VIEW allusers AS
     SELECT 
         users.userID AS 'userID',
-        users.userLogin AS 'userLogin',
+        users.userName AS 'userName',
+        users.userEmail AS 'userEmail',
         permissions.permissionID AS 'permissionID',
         permissions.permissionDescription AS 'permissionDescription'
     FROM
@@ -57,6 +58,7 @@ CREATE VIEW allusers AS
             LEFT JOIN
         permissions ON users.permissionGiven = permissions.permissionID
     ORDER BY users.permissionGiven;
+
 
 CREATE VIEW allehcclients AS
     SELECT 
