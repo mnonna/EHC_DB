@@ -4,6 +4,13 @@ CREATE TABLE permissions (
     PRIMARY KEY (permissionID)
 );
 
+INSERT INTO permissions (permissionDescription) VALUES ('ADMIN');
+INSERT INTO permissions (permissionDescription) VALUES ('RECEPTIONIST');
+INSERT INTO permissions (permissionDescription) VALUES ('CLEANING LADY');
+INSERT INTO permissions (permissionDescription) VALUES ('SERVICE MAN');
+INSERT INTO permissions (permissionDescription) VALUES ('CHEF');
+INSERT INTO permissions (permissionDescription) VALUES ('GUEST');
+
 CREATE TABLE services (
     serviceID TINYINT UNIQUE AUTO_INCREMENT,
     serviceType VARCHAR(20) NOT NULL,
@@ -36,12 +43,15 @@ INSERT INTO services (serviceType,serviceTag,serviceHourPrice) VALUES ('Wynajem 
 
 CREATE TABLE users (
     userID INT NOT NULL AUTO_INCREMENT,
+    userName VARCHAR(30) UNIQUE NOT NULL,
+    password VARCHAR(128) NOT NULL,
     permissionGiven TINYINT,
-    userLogin VARCHAR(60) UNIQUE,
+    userEmail VARCHAR(30) UNIQUE,
     PRIMARY KEY (userID),
     FOREIGN KEY (permissionGiven)
         REFERENCES permissions (permissionID)
 );
+
 
 CREATE TABLE clients (
     clientID INT NOT NULL AUTO_INCREMENT,
