@@ -281,30 +281,21 @@ DELIMITER ;
 
 #Dodawanie użytkownika do systemu EHC
 DELIMITER $$
-CREATE PROCEDURE addEhcUser(paramEmail VARCHAR(60),paramPermission TINYINT)
+CREATE PROCEDURE addEhcUser(paramUserName VARCHAR(30), paramPassword VARCHAR(128), paramPermission TINYINT,paramEmail VARCHAR(30))
 BEGIN 
 
-INSERT INTO users (permissionGiven, userLogin) VALUES (paramPermission, paramEmail);
+INSERT INTO users (userName,password,permissionGiven, userEmail) VALUES (paramUserName, paramPassword, paramPermission,paramEmail);
 
 END $$
 DELIMITER ;
 
-#Usuwanie użytkownika z EHC po emailu#
-DELIMITER $$ 
-CREATE PROCEDURE deleteEhcUser(paramEmail VARCHAR(60))
-BEGIN
-
-DELETE FROM users WHERE users.userLogin = paramEmail;
-
-END $$
-DELIMITER ;
 
 ##UŻYTKOWNIK PO EMAIL##
 DELIMITER $$
-CREATE PROCEDURE selectUser (paramEmail VARCHAR(60))
+CREATE PROCEDURE selectUser (paramEmail VARCHAR(30))
 BEGIN
 
-SELECT *FROM allusers WHERE `userLogin`=paramEmail;
+SELECT *FROM allusers WHERE `userEmail`=paramEmail;
 
 END$$
 DELIMITER ;
@@ -323,11 +314,10 @@ DELIMITER $$
 CREATE PROCEDURE selectUserEmails (paramPermission TINYINT)
 BEGIN
 
-SELECT `userLogin` FROM allusers WHERE `permissionID`=paramPermission;
+SELECT `userEmail` FROM allusers WHERE `permissionID`=paramPermission;
 
 END$$
 DELIMITER ;
-
 
 #Update ostatniego sprzątania pokoju - sprzątaczka#
 DELIMITER $$
@@ -478,7 +468,6 @@ SELECT MAX(room.floorNumber) AS `floorsAmount` FROM room;
 
 END$$
 DELIMITER ;
-
 
 DELIMITER $$
 CREATE PROCEDURE procedureSendReservationInfo()
